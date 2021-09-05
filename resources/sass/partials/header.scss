@@ -1,0 +1,116 @@
+#appheader {
+    background:$light-blue;
+    width:100%;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(220, 231, 245, 0.1);
+    .wrapper {
+        @include flex-row(space-between,center);
+        height:64px;
+    }
+    .logo {
+        @include flex-row(center,center);
+        cursor: pointer;
+        img {
+            width:46px;
+            height:46px;
+        }
+    }
+    .user {
+        text-align:right;
+        .logout {
+            cursor:pointer;
+            color:$menu-color;
+            @include flex-row(flex-end,center);
+            transition: all .3s ease-in-out;
+            span {
+                font-size:1em;
+            }
+            &:hover {
+                color:$blue;
+            }
+        }
+    }
+    nav {
+        height:53px;
+        width:100%;
+        background:$light-blue;
+        border-top: 1px solid rgba(220, 231, 245, 0.1);
+        .wrapper {
+            @include flex-row(flex-start,center);
+            height:53px;
+        }
+        .menu-item {
+            & > div {
+               @include flex-row(flex-start,center);
+                cursor:pointer;
+                color:$menu-color;
+                transition: all .3s ease-in-out;
+                &:hover {
+                    color:$blue;
+                }
+                & > span {
+                    font-size:1.5em;
+                    margin-right:10px;
+                }
+            }
+            &.active > div {
+                color:$blue;
+            }
+            @include flex-row(flex-start,center);
+            margin-right:20px;
+            height:53px;
+            position: relative;
+            & > ul {
+                position: absolute;
+                top: 100%;
+                z-index: 1000;
+                margin: 0px;
+                padding: 5px;
+                min-width: 190px;
+                background: $light-blue;
+                color:$menu-color;
+                box-shadow: 0 8px 16px 0 rgba(9, 17, 33, 0.4);
+                border: 1px solid rgba(231, 234, 243, 0.1);
+                opacity: 0;
+                visibility: hidden;
+                transform: rotateX(-75deg);
+                transform-style: preserve-3d;
+                & > li {
+                    position: relative;
+                    color:$menu-color;
+                    margin: 0px;
+                    padding: 0px;
+                    text-align: left;
+                    display: block;
+                    line-height: 22px;
+                    padding: 8px 35px;
+                    text-transform: none;
+                    font-size: 1em;
+                    letter-spacing: normal;
+                    border-right: 0px solid;
+                    cursor:pointer;
+                    &:before {
+                        content: ">";
+                        position: absolute;
+                        top: 8px;
+                        left: 12px;
+                        font-size: .8em;
+                        color:$menu-color;
+                        display: block;
+                    }
+                    &:hover, &.active {
+                        color:$blue;
+                        &:before {
+                            color:$blue;
+                        }
+                    }
+                }
+            }
+            &:hover > ul{
+                opacity: 1;
+                visibility: visible;
+                transform: rotateX(0deg);
+            }
+        }
+    }
+}

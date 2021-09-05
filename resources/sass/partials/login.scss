@@ -1,0 +1,13 @@
+#login {
+    width:100vw;
+    height:100vh;
+    @include flex-column(center,center);
+    .login-title {
+        @include flex-row(center,center);
+        cursor: default;
+    }
+    .login-form {
+        width:80%;
+        max-width:450px;
+    }
+}

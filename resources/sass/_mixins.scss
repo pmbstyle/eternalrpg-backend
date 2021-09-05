@@ -1,0 +1,23 @@
+@mixin flex-column($justify,$align) {
+    display:flex;
+    flex-direction:column;
+    justify-content: $justify;
+    align-items: $align;
+}
+@mixin flex-row($justify,$align) {
+    display:flex;
+    flex-direction:row;
+    justify-content: $justify;
+    align-items: $align;
+}
+@mixin inline-flex-row($justify,$align) {
+    display:inline-flex;
+    flex-direction:row;
+    justify-content: $justify;
+    align-items: $align;
+}
+@mixin grid($repeat,$param,$padding) {
+    display:grid;
+    grid-template-columns: repeat($repeat, $param);
+    column-gap: $padding;
+}
