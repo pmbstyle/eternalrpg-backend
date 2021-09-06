@@ -14,7 +14,7 @@ export default ({
 	actions: {
 		async loginUser(ctx,user) {
 			let status = false
-			await Api().post('auth/login',{
+			await Api().post(process.env.MIX_APP_API_GATE+'auth/login',{
 					email:user.email,
 					password: user.password
 				})
@@ -35,7 +35,7 @@ export default ({
 		},
 		async checkToken(ctx) {
 			let status = false
-			await Api().post('auth/refresh').then(response => {
+			await Api().post(process.env.MIX_APP_API_GATE+'auth/refresh').then(response => {
 				if(response.data.access_token) {
 					ctx.commit('setToken',response.data.access_token)
 					ctx.commit('setUser',response.data.user)
@@ -50,7 +50,7 @@ export default ({
 			return status
 		},
 		async Logout(ctx) {
-			await Api().post('auth/refresh').then(() => {
+			await Api().post(process.env.MIX_APP_API_GATE+'auth/logout').then(() => {
 				ctx.commit('setToken','')
 				ctx.commit('setUser',{})
 				ctx.commit('setAuthStatus',false)
@@ -76,6 +76,7 @@ export default ({
 		setToken: function(state,token) {
 			state.token = token
 			axios.defaults.headers.common['Authorization'] = state.token
+			localStorage.token = state.token
 		},
 		setUser: function(state,user) {
 			state.user = user
