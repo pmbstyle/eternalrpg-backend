@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\WikiCategoryController;
 use App\Http\Controllers\WikiPostController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,9 +41,16 @@ Route::delete('/wiki-category/{id}', [WikiCategoryController::class, 'deleteWiki
 Route::get('/wiki-categories', [WikiCategoryController::class, 'getAllWikiCategories']);
 Route::get('/wiki-category/{id}', [WikiCategoryController::class, 'getWikiCategory']);
 
-//Wiki Products
+//Wiki Posts
 Route::post('/wiki-post', [WikiPostController::class, 'createWikiPost']);
 Route::post('/wiki-post/{id}', [WikiPostController::class, 'updateWikiPost']);
 Route::delete('/wiki-post/{id}', [WikiPostController::class, 'deleteWikiPost']);
 Route::get('/wiki-posts', [WikiPostController::class, 'getAllWikiPosts']);
 Route::get('/wiki-post/{id}', [WikiPostController::class, 'getWikiPost']);
+
+//News Posts
+Route::post('/news', [NewsController::class, 'createNewsPost']);
+Route::post('/news/{id}', [NewsController::class, 'updateNewsPost']);
+Route::delete('/news/{id}', [NewsController::class, 'deleteNewsPost']);
+Route::get('/news', [NewsController::class, 'getAllNews']);
+Route::get('/news/{id}', [NewsController::class, 'getNewsPost']);
