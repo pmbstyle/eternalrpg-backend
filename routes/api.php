@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WikiCategoryController;
 use App\Http\Controllers\WikiPostController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\DistroManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,7 @@ Route::post('/news/{id}', [NewsController::class, 'updateNewsPost']);
 Route::delete('/news/{id}', [NewsController::class, 'deleteNewsPost']);
 Route::get('/news', [NewsController::class, 'getAllNews']);
 Route::get('/news/{id}', [NewsController::class, 'getNewsPost']);
+
+//Distro
+Route::get('/distro', [DistroManagerController::class, 'getAllDistros']);
+Route::post('/distro/{id}', [DistroManagerController::class, 'updateDistro']);

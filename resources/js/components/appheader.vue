@@ -2,10 +2,10 @@
     <div id="appheader">
 		<div class="wrapper">
 			<div class="logo" @click="$router.push({name:'Dashboard'})">
-				<img src="/img/PNG-Server-Icon_RPG.png">
+				<img src="/img/logo-sm-square.png">
 				<div class="pl-20">
-					<h1 class="pb-0 mt-0 mb-0">YCA</h1>
-					<p class="mb-0 mt-5">ytyaCraft admin</p>
+					<h1 class="pb-0 mt-0 mb-0">EGA</h1>
+					<p class="mb-0 mt-5">Eternal Games Admin</p>
 				</div>
 			</div>
 			<div class="user">
