@@ -41,5 +41,10 @@ class DatabaseSeeder extends Seeder
             'delivery' => 'web',
             'status' => 'live',
         ]);
+
+        DB::table('maintenance_managers')->insert([
+            'status' => 'off',
+            'description' => 'none'
+        ]);
     }
 }

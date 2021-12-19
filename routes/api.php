@@ -8,6 +8,7 @@ use App\Http\Controllers\WikiCategoryController;
 use App\Http\Controllers\WikiPostController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\DistroManagerController;
+use App\Http\Controllers\MaintenanceManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,4 +59,9 @@ Route::get('/news/{id}', [NewsController::class, 'getNewsPost']);
 
 //Distro
 Route::get('/distro', [DistroManagerController::class, 'getAllDistros']);
+Route::get('/distro/{id}', [DistroManagerController::class, 'getDistro']);
 Route::post('/distro/{id}', [DistroManagerController::class, 'updateDistro']);
+
+//MaintenanceManager
+Route::get('/maintenance', [MaintenanceManagerController::class, 'getMaintenance']);
+Route::post('/maintenance/{id}', [MaintenanceManagerController::class, 'updateMaintenance']);

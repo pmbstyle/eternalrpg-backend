@@ -15,6 +15,13 @@ class DistroManagerController extends Controller
         return response($distros, 200);
     }
 
+    public function getDistro(Request $request) {
+
+        $distro = DistroManager::find($request->id);
+        
+        return response($distro, 200);
+    }
+
     public function updateDistro(Request $request) {
         if(DistroManager::where('id', $request->id)->exists()) {
             $distro = DistroManager::find($request->id);
