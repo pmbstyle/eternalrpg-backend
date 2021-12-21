@@ -15,7 +15,7 @@
                     </div>
                     <div>
                         <label>Maintenance description</label>
-                        <input type="text" v-model="maintenance.description" class="form-control" placeholder="Description">
+                        <input type="text" v-model="maintenanceEdit.description" class="form-control" placeholder="Description">
                     </div>
                 </div>
             </div>
