@@ -9,6 +9,7 @@ use App\Http\Controllers\WikiPostController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\DistroManagerController;
 use App\Http\Controllers\MaintenanceManagerController;
+use App\Http\Controllers\MediaManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,11 @@ Route::group([
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//Media Manager
+Route::get('/media', [MediaManagerController::class, 'mediaGet']);
+Route::post('/media', [MediaManagerController::class, 'mediaCreate']);
+Route::delete('/media', [MediaManagerController::class, 'mediaDelete']);
 
 //Wiki Categories
 Route::post('/wiki-category', [WikiCategoryController::class, 'createWikiCategory']);

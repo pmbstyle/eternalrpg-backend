@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Support\Facades\Storage;
+
 use App\Models\News;
 
 class NewsController extends Controller
@@ -50,9 +52,7 @@ class NewsController extends Controller
         $post->full_text_ru = $request->full_text_ru;
         $post->slug = $request->slug;
         if(!is_null($request->image)) {
-            $name = $request->image->getClientOriginalName();
-            $request->image->move(public_path('images'), $name);
-            $post->image = $name;
+            $post->image = $request->image;
         }
 
         $post->save();
@@ -71,11 +71,8 @@ class NewsController extends Controller
             $post->full_text_en = is_null($request->full_text_en) ? $post->full_text_en : $request->full_text_en;
             $post->full_text_ru = is_null($request->full_text_ru) ? $post->full_text_ru : $request->full_text_ru;
             if(!is_null($request->image)) {
-                $name = $request->image->getClientOriginalName();
-                if($name && $post->image != $name) {
-                    $request->image->move(public_path('images'), $name);
-                    $post->image = $name;
-                }
+                $result = Storage::url(Storage::put('public/news', $request->file));
+                $post->image = $result;
             }
 
             $post->save();

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
+import News from '../views/News.vue'
+import NewsCreatePost from '../views/NewsCreatePost.vue'
 import Wiki from '../views/Wiki.vue'
 import WikiCreatePost from '../views/WikiCreatePost.vue'
 import WikiEditPost from '../views/WikiEditPost.vue'
@@ -23,6 +25,16 @@ const routes = [
 		path: '/dashboard',
 		name: 'Dashboard',
 		component: Dashboard
+	},
+	{
+		path: '/news',
+		name: 'News',
+		component: News
+	},
+	{
+		path: '/news/create-post',
+		name: 'NewsCreatePost',
+		component: NewsCreatePost
 	},
 	{
 		path: '/wiki',
