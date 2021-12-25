@@ -29,7 +29,7 @@
 				</div>
 			</div>
 			<div class="mid">
-				<select class="form-control" name="imagetype" id="imagetype" v-model="type">
+				<select class="form-control" name="imagetype" id="imagetype" v-model="type" @change="mediaTypeChange()">
 					<option :value="type" v-for="(type,index) in mediaTypes" :key="index">{{type}}</option>
 				</select>
 			</div>
@@ -116,6 +116,11 @@ export default {
 		setList: function() {
 			this.list = this.media.data
 			this.loading = false
+		},
+		mediaTypeChange: async function() {
+			this.loading = true
+			await this.getMedia({page:1,type:this.type})
+			this.setList()
 		},
 		setPhoto: async function(event){
 			let files = []

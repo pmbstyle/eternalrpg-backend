@@ -48,7 +48,6 @@ class MediaManagerController extends Controller
     }
 
     public function mediaDelete(Request $request) {
-        \Log::info($request->id);
         $media = MediaManager::find($request->id);
         $media_name = basename($media->image_url);
         $media_thumb = basename($media->image_thumb_url);

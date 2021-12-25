@@ -35,7 +35,6 @@ export default ({
             })
         },
         async deleteMedia(ctx,id) {
-            console.log(id)
             let status = false
             await Api().delete(process.env.MIX_APP_API_GATE+'media/'+id)
             .then(response => {
