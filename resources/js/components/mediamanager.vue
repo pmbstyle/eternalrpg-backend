@@ -23,6 +23,10 @@
 						Cancel
 					</template>
 				</div>
+				<div v-if="selected.id != null" @click="deleteImage()">
+					<span class="material-icons">delete_forever</span>
+					Delete
+				</div>
 			</div>
 			<div class="mid">
 				<select class="form-control" name="imagetype" id="imagetype" v-model="type">
@@ -107,7 +111,7 @@ export default {
 		this.setList()
 	},
 	methods: {
-		...mapActions(['getMedia','postMedia']),
+		...mapActions(['getMedia','postMedia','deleteMedia']),
 		...mapMutations([]),
 		setList: function() {
 			this.list = this.media.data
@@ -146,6 +150,12 @@ export default {
 				})
 				this.$emit('selectedMedia', imgs)
 			}
+		},
+		deleteImage: async function(){
+			this.loading = true
+			await this.deleteMedia(this.selected.id)
+			await this.getMedia({page:1,type:this.type})
+			this.setList()
 		}
 	}
 }

@@ -48,14 +48,13 @@ class MediaManagerController extends Controller
     }
 
     public function mediaDelete(Request $request) {
-        foreach ($request->id_array as $id) {
-            $media = MediaManager::find($id);
-            $media_name = basename($media->image_url);
-            $media_thumb = basename($media->image_thumb_url);
-            Storage::disk('public')->delete($media->type.'/'.$media_name);
-            Storage::disk('public')->delete($media->type.'/'.$media_thumb);
-            $media->delete();
-        }
+        \Log::info($request->id);
+        $media = MediaManager::find($request->id);
+        $media_name = basename($media->image_url);
+        $media_thumb = basename($media->image_thumb_url);
+        Storage::disk('public')->delete($media->type.'/'.$media_name);
+        Storage::disk('public')->delete($media->type.'/'.$media_thumb);
+        $media->delete();
         return response()->json('files was deleted');
     }
 }

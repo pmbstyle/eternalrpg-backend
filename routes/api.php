@@ -40,7 +40,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Media Manager
 Route::get('/media', [MediaManagerController::class, 'mediaGet']);
 Route::post('/media', [MediaManagerController::class, 'mediaCreate']);
-Route::delete('/media', [MediaManagerController::class, 'mediaDelete']);
+Route::delete('/media/{id}', [MediaManagerController::class, 'mediaDelete']);
 
 //Wiki Categories
 Route::post('/wiki-category', [WikiCategoryController::class, 'createWikiCategory']);

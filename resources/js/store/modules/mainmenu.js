@@ -11,29 +11,38 @@ export default ({
             },
             {
                 id:1,
-                name:'Distros',
-                alias:'Distros',
-                icon:'extension',
+                name:'Client',
+                alias:'',
+                icon:'cloud_circle',
                 active:false,
-                children:[]
+                children:[
+                {
+                    id:10,
+                    name:'Distros',
+                    alias:'Distros',
+                    icon:'extension',
+                    active:false,
+                    children:[]
+                },
+                {
+                    id:11,
+                    name:'Maintenance',
+                    alias:'Maintenance',
+                    icon:'engineering',
+                    active:false,
+                    children:[]
+                },
+                ]
             },
             {
                 id:2,
-                name:'Maintenance',
-                alias:'Maintenance',
-                icon:'engineering',
-                active:false,
-                children:[]
-            },
-            {
-                id:3,
                 name:'News',
                 alias:'News',
                 icon:'newspaper',
                 active:false,
                 children:[
                     {
-                        id:32,
+                        id:20,
                         name:'Create Post',
                         alias:'NewsCreatePost',
                         active:false
@@ -41,26 +50,26 @@ export default ({
                 ]
             },
             {
-                id:4,
+                id:3,
                 name:'Wiki',
                 alias:'Wiki',
                 icon:'description',
                 active:false,
                 children:[
                     {
-                        id:40,
+                        id:30,
                         name:'Categories',
                         alias:'WikiCategories',
                         active:false
                     },
                     {
-                        id:41,
+                        id:31,
                         name:'Create Category',
                         alias:'WikiCreateCategory',
                         active:false
                     },
                     {
-                        id:42,
+                        id:32,
                         name:'Create Post',
                         alias:'WikiCreatePost',
                         active:false
@@ -68,14 +77,14 @@ export default ({
                 ]
             },
             {
-                id:5,
+                id:4,
                 name:'Users',
                 alias:'Users',
                 icon:'perm_identity',
                 active:false,
                 children:[
                     {
-                        id:50,
+                        id:40,
                         name:'Create User',
                         alias:'UserCreate',
                         active:false
@@ -83,20 +92,20 @@ export default ({
                 ]
             },
             {
-                id:6,
+                id:5,
                 name:'Buget & Sales',
                 alias:'Buget',
                 icon:'savings',
                 active:false,
                 children:[
                     {
-                        id:60,
+                        id:50,
                         name:'Sales',
                         alias:'Sales',
                         active:false,
                     },
                     {
-                        id:61,
+                        id:51,
                         name:'Spending',
                         alias:'Spending',
                         active:false,

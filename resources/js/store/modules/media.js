@@ -34,9 +34,10 @@ export default ({
                 return error
             })
         },
-        async deleteNewsPost(ctx,ids) {
+        async deleteMedia(ctx,id) {
+            console.log(id)
             let status = false
-            await Api().delete(process.env.MIX_APP_API_GATE+'media/',ids)
+            await Api().delete(process.env.MIX_APP_API_GATE+'media/'+id)
             .then(response => {
                 if(response.data) {
                     status = true
