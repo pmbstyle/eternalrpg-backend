@@ -66,13 +66,13 @@ class NewsController extends Controller
             $post = News::find($request->id);
             $post->title_en = is_null($request->title_en) ? $post->title_en : $request->title_en;
             $post->title_ru = is_null($request->title_ru) ? $post->title_ru : $request->title_ru;
+            $post->slug = is_null($request->slug) ? $post->slug : $request->slug;
             $post->description_en = is_null($request->description_en) ? $post->description_en : $request->description_en;
             $post->description_ru = is_null($request->description_ru) ? $post->description_ru : $request->description_ru;
             $post->full_text_en = is_null($request->full_text_en) ? $post->full_text_en : $request->full_text_en;
             $post->full_text_ru = is_null($request->full_text_ru) ? $post->full_text_ru : $request->full_text_ru;
             if(!is_null($request->image)) {
-                $result = Storage::url(Storage::put('public/news', $request->file));
-                $post->image = $result;
+                $post->image = $request->image;
             }
 
             $post->save();

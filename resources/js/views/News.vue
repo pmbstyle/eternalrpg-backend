@@ -117,7 +117,7 @@ export default {
             await this.deleteNewsPost(id)
 			this.postsList = []
             await this.getNewsPosts()
-			await this.news.posts.forEach(i => {
+			await this.news.posts.data.forEach(i => {
 				this.postsList.push(i)
 			})
         },
