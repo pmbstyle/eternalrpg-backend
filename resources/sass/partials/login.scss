@@ -9,5 +9,21 @@
     .login-form {
         width:80%;
         max-width:450px;
+        position: relative;
+        &:before {
+            content:'';
+            width:550px;
+            height:234px;
+            position: absolute;
+            right: -15px;
+            top: -236px;
+            background:url('../../img/eternal-games-logo.png') no-repeat center;
+            background-size: cover;
+            z-index:-1;
+        }
+        &.card {
+            background:rgba(31, 41, 64, .8) !important;
+            border-top: 2px solid rgba(207, 152, 45, 1) !important;
+        }
     }
 }

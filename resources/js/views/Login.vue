@@ -1,12 +1,8 @@
 <template>
 	<div id="login" v-if="showUI">
-		<div class="login-title pb-20">
-			<img src="img/eternal-logo-md.png">
-			<!-- <div class="pl-20">
-				<h1 class="pb-0 mt-0 mb-0">YCA</h1>
-				<p class="mb-0 mt-5">ytyaCraft admin</p>
-			</div> -->
-		</div>
+		<!-- <div class="login-title pb-20">
+			<img src="img/logo-sm-on-black.png">
+		</div> -->
 		<div class="login-form card mb-0">
 			<div class="form-group pt-20">
 				<input type="text" v-model="form.email" class="form-control" placeholder="Email">
