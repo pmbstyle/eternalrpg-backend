@@ -242,3 +242,9 @@ body {
     width:auto;
     margin:0 auto;
 }
+.apexcharts-canvas {
+    color:$font-alt;
+    svg {
+        background:transparent !important;
+    }
+}

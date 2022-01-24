@@ -46,7 +46,7 @@
                 color:$menu-color;
                 transition: all .3s ease-in-out;
                 &:hover {
-                    color:$blue;
+                    color:$yellow;
                 }
                 & > span {
                     font-size:1.5em;
@@ -54,7 +54,7 @@
                 }
             }
             &.active > div {
-                color:$blue;
+                color:$yellow;
             }
             @include flex-row(flex-start,center);
             margin-right:20px;
@@ -99,9 +99,9 @@
                         display: block;
                     }
                     &:hover, &.active {
-                        color:$blue;
+                        color:$yellow;
                         &:before {
-                            color:$blue;
+                            color:$yellow;
                         }
                     }
                 }

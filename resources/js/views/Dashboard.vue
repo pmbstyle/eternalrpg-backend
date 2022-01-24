@@ -5,20 +5,15 @@
 				<h1>Hi, {{user.name}}. Welcome back!</h1>
 				<p>Overall project statistics.</p>
 			</div>
-			<div class="grid-2 mt-20">
-				<div class="card card-primary">
+			<div class="grid-1 mt-20">
+				<div class="card">
 					<div class="p-10">
-						<h6>Today's sales</h6>
-						<div class="ammount">
-							<div>15</div>
-							<div>
-								<span class="material-icons">arrow_circle_up</span>
-								+3
-							</div>
-						</div>
-						<D3LineChart :config="chart_config" :datum="chart_data"></D3LineChart>
+						<h6>Servers Online</h6>
+						<apexcharts type="area" :height="400" :options="chart_config" :series="chart_series"></apexcharts>
 					</div>
 				</div>
+			</div>
+			<div class="grid-1 mt-20">
 				<div class="card card-danger">
 					<div class="p-10">
 						<h6>Total sales</h6>
@@ -33,7 +28,7 @@
 				</div>
 			</div>
 			<div class="grid-2 mt-20">
-				<div class="card card-success">
+				<div class="card card-warning">
 					<div class="p-10">
 						<h6>Today's profit</h6>
 						<div class="ammount">
@@ -45,7 +40,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="card card-warning">
+				<div class="card card-success">
 					<div class="p-10">
 						<h6>Total Profit</h6>
 						<div class="ammount">
@@ -65,40 +60,88 @@
 import Vue from 'vue'
 import Toasted from 'vue-toasted'
 import {mapGetters,mapActions} from 'vuex'
-import { D3LineChart } from 'vue-d3-charts'
+import VueApexCharts from 'vue-apexcharts'
 Vue.use(Toasted)
 export default {
 	name:'Dashboard',
 	data: function(){
 		return {
-			chart_data: [
-        {hours: 238, production: 134, date: 2000},
-        {hours: 938, production: 478, date: 2001},
-        {hours: 1832, production: 1392, date: 2002},
-        {hours: 2092, production: 2343, date: 2003},
-        {hours: 2847, production: 2346, date: 2004},
-        {hours: 2576, production: 2233, date: 2005},
-        {hours: 2524, production: 2325, date: 2006},
-        {hours: 1648, production: 2456, date: 2007},
-        {hours: 2479, production: 2329, date: 2008},
-        {hours: 3200, production: 2438, date: 2009}
-      ],
-      chart_config: {
-        values: ['hours', 'production'],
-        date: {
-          key: 'date',
-          inputFormat: '%Y',
-          outputFormat: '%Y',
-        },
-        points:false,
-        axis: {
-          yTicks: 3,
-        }
-      },
+			chart_series: [
+				{
+					name:'Eternal Vanilla',
+					data: [
+						26,
+						35,
+						44,
+						53,
+						22,
+						45,
+						35,
+						65,
+						78,
+						25,
+						37,
+						55,
+						75,
+						86,
+						25,
+						35,
+						45,
+						55,
+						74,
+						12,
+						22,
+						35,
+						44,
+						36
+					]
+				},
+				{
+					name:'Eternal RPG',
+					data: [
+						36,
+						45,
+						64,
+						23,
+						32,
+						55,
+						36,
+						75,
+						88,
+						95,
+						17,
+						25,
+						45,
+						56,
+						65,
+						75,
+						85,
+						95,
+						84,
+						72,
+						52,
+						45,
+						64,
+						76
+					]
+				},
+			],
+			chart_config: {
+				chart: {
+					id: 'basic-bar',
+				},
+				xaxis: {
+					categories: ["1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00"],
+				},
+				theme: {
+					mode: 'dark', 
+					palette: 'palette8'
+				}
+			},
 		}
 	},
 	components: {
-		D3LineChart,
+		apexcharts: VueApexCharts,
 	},
 	computed: {
 		...mapGetters(['is_logged','user']),
