@@ -10,6 +10,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\DistroManagerController;
 use App\Http\Controllers\MaintenanceManagerController;
 use App\Http\Controllers\MediaManagerController;
+use App\Http\Controllers\ServerManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,3 +72,10 @@ Route::post('/distro/{id}', [DistroManagerController::class, 'updateDistro']);
 //MaintenanceManager
 Route::get('/maintenance', [MaintenanceManagerController::class, 'getMaintenance']);
 Route::post('/maintenance/{id}', [MaintenanceManagerController::class, 'updateMaintenance']);
+
+//Servers
+Route::post('/server', [ServerManagerController::class, 'createNewServer']);
+Route::post('/server/{id}', [ServerManagerController::class, 'updateServer']);
+Route::delete('/server/{id}', [ServerManagerController::class, 'deleteServer']);
+Route::get('/servers', [ServerManagerController::class, 'getAllServers']);
+Route::get('/server/{id}', [ServerManagerController::class, 'getServer']);
