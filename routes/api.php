@@ -11,6 +11,7 @@ use App\Http\Controllers\DistroManagerController;
 use App\Http\Controllers\MaintenanceManagerController;
 use App\Http\Controllers\MediaManagerController;
 use App\Http\Controllers\ServerManagerController;
+use App\Http\Controllers\ServerStatusManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,3 +80,6 @@ Route::post('/server/{id}', [ServerManagerController::class, 'updateServer']);
 Route::delete('/server/{id}', [ServerManagerController::class, 'deleteServer']);
 Route::get('/servers', [ServerManagerController::class, 'getAllServers']);
 Route::get('/server/{id}', [ServerManagerController::class, 'getServer']);
+
+//ServerStatus
+Route::get('/server-stats/{id}/{period}', [ServerStatusManagerController::class, 'getServerStats']);

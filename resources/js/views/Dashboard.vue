@@ -62,76 +62,23 @@ import Toasted from 'vue-toasted'
 import {mapGetters,mapActions} from 'vuex'
 import VueApexCharts from 'vue-apexcharts'
 Vue.use(Toasted)
+import Api from '../helpers/api'
 export default {
 	name:'Dashboard',
 	data: function(){
 		return {
-			chart_series: [
-				{
-					name:'Eternal Vanilla',
-					data: [
-						26,
-						35,
-						44,
-						53,
-						22,
-						45,
-						35,
-						65,
-						78,
-						25,
-						37,
-						55,
-						75,
-						86,
-						25,
-						35,
-						45,
-						55,
-						74,
-						12,
-						22,
-						35,
-						44,
-						36
-					]
-				},
-				{
-					name:'Eternal RPG',
-					data: [
-						36,
-						45,
-						64,
-						23,
-						32,
-						55,
-						36,
-						75,
-						88,
-						95,
-						17,
-						25,
-						45,
-						56,
-						65,
-						75,
-						85,
-						95,
-						84,
-						72,
-						52,
-						45,
-						64,
-						76
-					]
-				},
-			],
+			period:1440,
+			chart_series: [],
 			chart_config: {
 				chart: {
 					id: 'basic-bar',
 				},
 				xaxis: {
-					categories: ["1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00"],
+					categories: [],
+					type: "datetime",
+					axisBorder: { show: false },
+					axisTicks: { show: false },
+					tooltip: { enabled: false },
 				},
 				theme: {
 					mode: 'dark', 
@@ -144,11 +91,38 @@ export default {
 		apexcharts: VueApexCharts,
 	},
 	computed: {
-		...mapGetters(['is_logged','user']),
+		...mapGetters(['is_logged','user','servers']),
 
 	},
+	mounted: async function() {
+		await this.getServers()
+		await this.getStats()
+	},
 	methods: {
-		...mapActions([]),
+		...mapActions(['getServers']),
+		getStats: async function(){
+			this.servers.forEach(async (server) => {
+				let stats = []
+				await Api().get(process.env.MIX_APP_API_GATE+'server-stats/'+server.id+'/'+this.period)
+				.then(response => {
+					stats = response.data
+				})
+				.catch(error => {
+					console.log(error)
+				})
+				console.log(stats)
+				let chart_data = {
+					name:server.name,
+					data:[]
+				}
+				stats.forEach(stat => {
+					chart_data.data.push(stat.players)
+					this.chart_config.xaxis.categories.length != stats.length ? this.chart_config.xaxis.categories.push(stat.created_at) : ''
+				})
+				this.chart_series.push(chart_data)
+			})
+		}
+
 	}
 }
 </script>
