@@ -66,6 +66,25 @@ body {
         background-image: linear-gradient(to left, #efa65f, #f76a2d) !important;
         padding:0;
     }
+    .card-title {
+        @include flex-row(flex-start, center);
+        margin-bottom: 1em;
+        h6 {
+            margin:0;
+        }
+        .material-icons {
+            margin-left:10px;
+            cursor:pointer;
+            &:hover {
+                color:$yellow;
+            }
+        }
+        select.form-control {
+            margin-left:10px;
+            max-width:200px;
+            height:30px;
+        }
+    }
 }
 .btn-wrap {
     @include flex-row(flex-end,center);

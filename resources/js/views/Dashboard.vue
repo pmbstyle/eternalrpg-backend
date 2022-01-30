@@ -8,7 +8,14 @@
 			<div class="grid-1 mt-20">
 				<div class="card">
 					<div class="p-10">
-						<h6>Servers Online</h6>
+						<div class="card-title">
+							<h6>Servers Online</h6>
+							<select class="form-control" name="category" id="category" v-model="period">
+								<option value="" disabled>Time period</option>
+								<option :value="period.period" v-for="period in periods" :key="period.id">{{period.name}}</option>
+							</select>
+							<span class="material-icons" @click="refreshStats">sync</span>
+						</div>
 						<apexcharts type="area" :height="400" :options="chart_config" :series="chart_series"></apexcharts>
 					</div>
 				</div>
@@ -68,6 +75,23 @@ export default {
 	data: function(){
 		return {
 			period:1440,
+			periods:[
+				{
+					id:0,
+					name:'24 hours',
+					period:1440
+				},
+				{
+					id:1,
+					name:'48 hours',
+					period:2880
+				},
+				{
+					id:2,
+					name:'Last week',
+					period:10080
+				}
+			],
 			chart_series: [],
 			chart_config: {
 				chart: {
@@ -79,6 +103,7 @@ export default {
 					axisBorder: { show: false },
 					axisTicks: { show: false },
 					tooltip: { enabled: false },
+					labels: {datetimeUTC: false}
 				},
 				theme: {
 					mode: 'dark', 
@@ -110,7 +135,6 @@ export default {
 				.catch(error => {
 					console.log(error)
 				})
-				console.log(stats)
 				let chart_data = {
 					name:server.name,
 					data:[]
@@ -121,6 +145,11 @@ export default {
 				})
 				this.chart_series.push(chart_data)
 			})
+		},
+		refreshStats: function() {
+			this.chart_series = []
+			this.chart_config.xaxis.categories = []
+			this.getStats()
 		}
 
 	}

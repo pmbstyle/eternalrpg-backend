@@ -12,7 +12,7 @@ class ServerManagerController extends Controller
 {
     public function getAllServers(Request $request) {
 
-        $servers = ServerManager::get();
+        $servers = ServerManager::orderBy('created_at', 'desc')->get();
         
         return response($servers, 200);
     }

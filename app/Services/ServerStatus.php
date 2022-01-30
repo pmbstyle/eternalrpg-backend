@@ -59,15 +59,6 @@ class ServerStatus
         $descriptionRaw = isset($data->description) ? $data->description : false;
         $description = $descriptionRaw;
         
-        // colorize the description if it is supported
-        if (gettype($descriptionRaw) == 'object' && isset($descriptionRaw->extra)) {
-            $description = '';
-            foreach ($descriptionRaw->extra as $item) {
-                $description .= isset($item->bold) && $item->bold ? '<b>' : '';
-                $description .= isset($item->bold) && $item->bold ? '</b>' : '';
-            }
-        }
-        
         return array(
             'hostname' => $host,
             'port' => $port,
