@@ -14,6 +14,9 @@ import WikiEditCategory from '../views/WikiEditCategory.vue'
 import Distros from '../views/Distros.vue'
 import Distro from '../views/Distro.vue'
 import Maintenance from '../views/Maintenance.vue'
+import Servers from '../views/Servers.vue'
+import ServerEdit from '../views/ServerEdit.vue'
+import ServerCreate from '../views/ServerCreate.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -86,6 +89,21 @@ const routes = [
 		path: '/maintenance',
 		name: 'Maintenance',
 		component: Maintenance
+	},
+	{
+		path: '/servers',
+		name: 'Servers',
+		component: Servers
+	},
+	{
+		path: '/server/:id',
+		name: 'ServerEdit',
+		component: ServerEdit
+	},
+	{
+		path: '/create-server',
+		name: 'ServerCreate',
+		component: ServerCreate
 	},
 ]
 

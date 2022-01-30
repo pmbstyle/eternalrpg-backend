@@ -11,7 +11,7 @@ export default ({
             },
             {
                 id:1,
-                name:'Client',
+                name:'Servers & Client',
                 alias:'',
                 icon:'cloud_circle',
                 active:false,
@@ -28,6 +28,14 @@ export default ({
                     id:11,
                     name:'Maintenance',
                     alias:'Maintenance',
+                    icon:'engineering',
+                    active:false,
+                    children:[]
+                },
+                {
+                    id:12,
+                    name:'Servers',
+                    alias:'Servers',
                     icon:'engineering',
                     active:false,
                     children:[]

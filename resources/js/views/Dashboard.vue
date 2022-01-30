@@ -127,23 +127,25 @@ export default {
 		...mapActions(['getServers']),
 		getStats: async function(){
 			this.servers.forEach(async (server) => {
-				let stats = []
-				await Api().get(process.env.MIX_APP_API_GATE+'server-stats/'+server.id+'/'+this.period)
-				.then(response => {
-					stats = response.data
-				})
-				.catch(error => {
-					console.log(error)
-				})
-				let chart_data = {
-					name:server.name,
-					data:[]
+				if(server.status !== 'off'){
+					let stats = []
+					await Api().get(process.env.MIX_APP_API_GATE+'server-stats/'+server.id+'/'+this.period)
+					.then(response => {
+						stats = response.data
+					})
+					.catch(error => {
+						console.log(error)
+					})
+					let chart_data = {
+						name:server.name,
+						data:[]
+					}
+					stats.forEach(stat => {
+						chart_data.data.push(stat.players)
+						this.chart_config.xaxis.categories.length != stats.length ? this.chart_config.xaxis.categories.push(stat.created_at) : ''
+					})
+					this.chart_series.push(chart_data)
 				}
-				stats.forEach(stat => {
-					chart_data.data.push(stat.players)
-					this.chart_config.xaxis.categories.length != stats.length ? this.chart_config.xaxis.categories.push(stat.created_at) : ''
-				})
-				this.chart_series.push(chart_data)
 			})
 		},
 		refreshStats: function() {
