@@ -1,18 +1,18 @@
-require('./bootstrap');
-
-import Vue from 'vue'
-import VueAxios from 'vue-axios'
-import Vuex from 'vuex'
-import router from './router'
-import store from './store'
+require('./bootstrap')
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import { vfmPlugin } from 'vue-final-modal'
 import Main from './views/Main'
-import Paginate from 'vuejs-paginate'
-import VModal from 'vue-js-modal'
-Vue.component('paginate', Paginate)
-Vue.use(VueAxios, axios, Vuex)
-Vue.use(VModal)
-new Vue({
-    store,
-    router,
-    render: h => h(Main)
-}).$mount('#app')
+import router from './router'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+const app = createApp(Main)
+
+app.use(createPinia())
+app.use(router)
+app.use(VueAxios, axios)
+app.use(vfmPlugin)
+app.mount('#app')
+
+app.config.globalProperties.axios = axios

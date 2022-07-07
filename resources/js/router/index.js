@@ -1,116 +1,106 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Login from '../views/Login.vue'
-import Dashboard from '../views/Dashboard.vue'
-import News from '../views/News.vue'
-import NewsCreatePost from '../views/NewsCreatePost.vue'
-import NewsEditPost from '../views/NewsEditPost.vue'
-import Wiki from '../views/Wiki.vue'
-import WikiCreatePost from '../views/WikiCreatePost.vue'
-import WikiEditPost from '../views/WikiEditPost.vue'
-import WikiCategories from '../views/WikiCategories.vue'
-import WikiCreateCategory from '../views/WikiCreateCategory.vue'
-import WikiEditCategory from '../views/WikiEditCategory.vue'
-import Distros from '../views/Distros.vue'
-import Distro from '../views/Distro.vue'
-import Maintenance from '../views/Maintenance.vue'
-import Servers from '../views/Servers.vue'
-import ServerEdit from '../views/ServerEdit.vue'
-import ServerCreate from '../views/ServerCreate.vue'
-Vue.use(VueRouter)
+import { createRouter, createWebHistory } from 'vue-router'
 
-const routes = [
+let routes = [
 	{
 		path: '/',
 		name: 'Login',
-		component: Login
+		component: () => import('../views/Login')
 	},
-	{
-		path: '/dashboard',
-		name: 'Dashboard',
-		component: Dashboard
-	},
-	{
-		path: '/news',
-		name: 'News',
-		component: News
-	},
-	{
-		path: '/news/create-post',
-		name: 'NewsCreatePost',
-		component: NewsCreatePost
-	},
-	{
-		path: '/news/:id',
-		name: 'NewsEditPost',
-		component: NewsEditPost
-	},
-	{
-		path: '/wiki',
-		name: 'Wiki',
-		component: Wiki
-	},
-	{
-		path: '/wiki/create-post',
-		name: 'WikiCreatePost',
-		component: WikiCreatePost
-	},
-	{
-		path: '/wiki/edit-post/:id',
-		name: 'WikiEditPost',
-		component: WikiEditPost
-	},
-	{
-		path: '/wiki/categories',
-		name: 'WikiCategories',
-		component: WikiCategories
-	},
-	{
-		path: '/wiki/create-category',
-		name: 'WikiCreateCategory',
-		component: WikiCreateCategory
-	},
-	{
-		path: '/wiki/edit-category/:id',
-		name: 'WikiEditCategory',
-		component: WikiEditCategory
-	},
-	{
-		path: '/distros',
-		name: 'Distros',
-		component: Distros
-	},
-	{
-		path: '/distro/:id',
-		name: 'Distro',
-		component: Distro
-	},
-	{
-		path: '/maintenance',
-		name: 'Maintenance',
-		component: Maintenance
-	},
-	{
-		path: '/servers',
-		name: 'Servers',
-		component: Servers
-	},
-	{
-		path: '/server/:id',
-		name: 'ServerEdit',
-		component: ServerEdit
-	},
-	{
-		path: '/create-server',
-		name: 'ServerCreate',
-		component: ServerCreate
-	},
+	// {
+	// 	path: '/dashboard',
+	// 	name: 'Dashboard',
+	// 	component: () => import('../views/Dashboard')
+	// },
+	// {
+	// 	path: '/news',
+	// 	name: 'News',
+	// 	component: () => import('../views/News')
+	// },
+	// {
+	// 	path: '/news/create-post',
+	// 	name: 'NewsCreatePost',
+	// 	component: () => import('../views/NewsCreatePost')
+	// },
+	// {
+	// 	path: '/news/:id',
+	// 	name: 'NewsEditPost',
+	// 	component: () => import('../views/NewsEditPost')
+	// },
+	// {
+	// 	path: '/wiki',
+	// 	name: 'Wiki',
+	// 	component: () => import('../views/Wiki')
+	// },
+	// {
+	// 	path: '/wiki/create-post',
+	// 	name: 'WikiCreatePost',
+	// 	component: () => import('../views/WikiCreatePost')
+	// },
+	// {
+	// 	path: '/wiki/edit-post/:id',
+	// 	name: 'WikiEditPost',
+	// 	component: () => import('../views/WikiEditPost')
+	// },
+	// {
+	// 	path: '/wiki/categories',
+	// 	name: 'WikiCategories',
+	// 	component: () => import('../views/')
+	// },
+	// {
+	// 	path: '/wiki/create-category',
+	// 	name: 'WikiCreateCategory',
+	// 	component: () => import('../views/WikiCreateCategory')
+	// },
+	// {
+	// 	path: '/wiki/edit-category/:id',
+	// 	name: 'WikiEditCategory',
+	// 	component: () => import('../views/WikiEditCategory')
+	// },
+	// {
+	// 	path: '/distros',
+	// 	name: 'Distros',
+	// 	component: () => import('../views/Distros')
+	// },
+	// {
+	// 	path: '/distro/:id',
+	// 	name: 'Distro',
+	// 	component: () => import('../views/Distro')
+	// },
+	// {
+	// 	path: '/maintenance',
+	// 	name: 'Maintenance',
+	// 	component: () => import('../views/Maintenance')
+	// },
+	// {
+	// 	path: '/servers',
+	// 	name: 'Servers',
+	// 	component: () => import('../views/Servers')
+	// },
+	// {
+	// 	path: '/server/:id',
+	// 	name: 'ServerEdit',
+	// 	component: () => import('../views/ServerEdit')
+	// },
+	// {
+	// 	path: '/create-server',
+	// 	name: 'ServerCreate',
+	// 	component: () => import('../views/ServerCreate')
+	//},
+	// {
+	// 	path: '/404',
+	// 	name: 'NotFound',
+	// 	component: () => import('../views/NotFound')
+	// },
+	// {
+	// 	path: '/:pathMatch(.*)*',
+	// 	name: 'not-found',
+	// 	component: () => import('../views/NotFound')
+	// }
 ]
 
-const router = new VueRouter({
-    mode: 'history',
-	base: '/',
-	routes
+const router = createRouter({
+	history: createWebHistory(),
+	routes: routes
 })
 
 export default router

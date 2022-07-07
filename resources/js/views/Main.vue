@@ -1,23 +1,9 @@
-<template>
-	<div id="app">
-		<div class="layout">
-			<appheader v-if="$route.name != 'Login'"/>
-			<router-view/>
-		</div>
-	</div>
-</template>
-<script>
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-import {mapGetters} from 'vuex'
+<script setup>
+import { RouterView } from 'vue-router'
 import appheader from '../components/appheader'
-Vue.use(VueAxios, axios)
-export default {
-	name:'Main',
-	components: {
-		appheader
-	},
-	computed: {}
-}
 </script>
+
+<template>
+	<appheader v-if="$route.name != 'Login'" />
+	<RouterView />
+</template>

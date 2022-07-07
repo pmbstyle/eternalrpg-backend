@@ -1,82 +1,88 @@
+<script setup>
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import router from '../router'
+import { useUser } from '../store/user'
+import Alert from '../components/alerts'
+const user = useUser()
+
+const form = ref({
+	email: 'slava@trofimov.ca',
+	password: ''
+})
+const showUI = ref(false)
+const inProgress = ref(false)
+const alertType = ref('alert-error')
+const showError = ref(false)
+const errorMessage = ref('Invalid credentials!')
+
+const verifyLogin = async function() {
+	inProgress.value = true
+	showError.value = false
+	let status = await user.loginUser(form.value)
+	if (status) {
+		redirectToDash()
+	} else {
+		inProgress.value = false
+		showError.value = true
+		setTimeout(() => {
+			showError.value = false
+		}, 5000)
+	}
+}
+
+const redirectToDash = function() {
+	localStorage.token = 'Bearer ' + user.userToken
+	axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+	router.push({ name: 'Dashboard' })
+}
+
+const formReady = () => {
+	return form.value.email.length > 0 && form.value.password.length > 0
+}
+
+onMounted(async () => {
+	if (localStorage.getItem('token') !== null) {
+		axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
+		let status = await user.checkToken()
+		if (status) {
+			redirectToDash()
+		} else {
+			showUI.value = true
+		}
+	} else {
+		showUI.value = true
+	}
+})
+
+</script>
+
 <template>
-	<div id="login" v-if="showUI">
-		<!-- <div class="login-title pb-20">
-			<img src="img/logo-sm-on-black.png">
-		</div> -->
-		<div class="login-form card mb-0">
-			<div class="form-group pt-20">
-				<input type="text" v-model="form.email" class="form-control" placeholder="Email">
-			</div>
-			<div class="form-group">
-				<input type="password" v-model="form.password" class="form-control" placeholder="Password" v-on:keyup.enter="verifyLogin()">
-			</div>
-			<div class="form-group text-center pt-20">
-				<button class="btn" :class="formRady || !inProgress ? 'btn-green' : 'btn-gray'" :disabled="!formRady || inProgress" @click="verifyLogin()">{{formRady ? 'Sign In' : '...'}}</button>
+	<div id="login" class="w-screen h-screen flex justify-center items-center" v-if="showUI">
+		<Alert :type="alertType" :show="showError" :msg="errorMessage" />
+		<div class="card w-96 h-auto shadow-xl bg-neutral">
+			<figure><img src="images/eternal-games-logo.png" alt="Shoes" /></figure>
+			<div class="card-body">
+				<div class="form-control">
+					<label class="input-group input-group-md">
+						<span class="w-20">Email</span>
+						<input type="text" v-model="form.email" class="input input-bordered w-full max-w-xs">
+					</label>
+				</div>
+				<div class="form-control">
+					<label class="input-group input-group-md">
+						<span class="w-20">Pwd</span>
+						<input type="password" v-model="form.password" class="input input-bordered w-full max-w-xs"
+							v-on:keyup.enter="verifyLogin()">
+					</label>
+				</div>
+				<div class="form-group text-center pt-10">
+					<button class="btn" :class="formReady() || !inProgress ? 'btn-primary' : ''"
+						:disabled="!formReady() || inProgress" @click="verifyLogin()">{{ formReady() ? 'Sign In' :
+						'...'
+						}}</button>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
-<script>
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-import Toasted from 'vue-toasted'
-import {mapGetters,mapActions} from 'vuex'
-Vue.use(VueAxios, axios)
-Vue.use(Toasted)
-export default {
-	name:'Login',
-	data: function(){
-		return {
-			form: {
-				email:'slava@trofimov.ca',
-				password:''
-			},
-			showUI: false,
-			inProgress: false
-		}
-	},
-	computed: {
-		...mapGetters(['is_logged','token']),
-		formRady: function() {
-			return this.form.email.length > 0 && this.form.password.length > 0
-		}
-	},
-	mounted: async function() {
-		if(localStorage.getItem('token')) {
-			this.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
-			let tada = await this.checkToken()
-			if(tada) {
-				this.redirectToDash()
-			} else {
-				this.showUI = true
-			}
-		} else {
-			this.showUI = true
-		}
-	},
-	methods: {
-		...mapActions(['loginUser', 'checkToken']),
-		verifyLogin: async function() {
-			this.inProgress = true
-			let tada = await this.loginUser(this.form)
-			if(tada) {
-				this.redirectToDash()
-			} else {
-				this.inProgress = false
-				this.$toasted.show("Invalid credentials!", { 
-					position: "top-center",
-					icon: 'info',
-					className: 'error',
-					duration : 5000
-				})
-			}
-		},
-		redirectToDash: function() {
-			localStorage.token = 'Bearer ' + this.token
-			this.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
-			this.$router.push({name:'Dashboard'})
-		}
-	}
-}
-</script>

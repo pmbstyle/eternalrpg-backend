@@ -1,3 +1,31 @@
+<script setup>
+import { ref, onMounted } from 'vue'
+import router from '../router'
+import { useUser } from '../store/user'
+const user = useUser()
+
+if(!user.is_logged) {
+	router.push({name: 'Login'})
+}
+
+onMounted(async () => {
+
+})
+
+</script>
+
+<template>
+	<div id="dashboard">
+		<div class="container mx-auto">
+			
+		</div>
+	</div>
+</template>
+
+<!-- 
+
+
+
 <template>
 	<div id="dashboard">
 		<div class="wrapper">
@@ -62,8 +90,8 @@
 			</div>
 		</div>
 	</div>
-</template>
-<script>
+</template> -->
+<!-- <script>
 import Vue from 'vue'
 import Toasted from 'vue-toasted'
 import {mapGetters,mapActions} from 'vuex'
@@ -156,4 +184,4 @@ export default {
 
 	}
 }
-</script>
+</script> -->

@@ -7,6 +7,7 @@
     <meta name="authenticated" content="{{ auth()->check() }}">
     <title>EGA</title>
     <link rel="icon" type="image/png" href="{{ asset('img/fp_favicon.png') }}">
+    <link href="{{ mix('css/tw.css') }}" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
